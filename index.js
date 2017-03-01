@@ -100,7 +100,7 @@ function processInclude(content, filePath, sourceMap) {
       .replace(/(\s+)/gi, " ")
       .replace(/(\/\/|\/\*|\#)(\s+)?=(\s+)?/g, "")
       .replace(/(\*\/)$/gi, "")
-      .replace(/['"]/g, "")
+      .replace(/['";]/g, "")
       .trim();
     var split = includeCommand.split(" ");
     

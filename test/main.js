@@ -152,4 +152,23 @@ describe("gulp-include", function () {
       }))
       .pipe(assert.end(done));
   });
+
+  it("should remove semicolon when including", function (done) {
+    var file = new gutil.File({
+      base: "test/fixtures/",
+      path: "test/fixtures/js/semicolon.js",
+      contents: fs.readFileSync("test/fixtures/js/semicolon.js")
+    });
+
+    testInclude = include();
+    testInclude.on("data", function (newFile) {
+      should.exist(newFile);
+      should.exist(newFile.contents);
+
+      String(newFile.contents).should.equal(String(fs.readFileSync("test/expected/js/semicolon.js"), "utf8"))
+      done();
+    });
+    testInclude.write(file);
+  });
+
 })
